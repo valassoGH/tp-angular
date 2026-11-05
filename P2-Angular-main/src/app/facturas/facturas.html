@@ -1,0 +1,97 @@
+<section class="pagina">
+  <div class="pagina-header">
+    <div>
+      <h2>Facturas</h2>
+      <p>Consulta de facturas con filtros, cambio de estado y carga de facturas nuevas.</p>
+    </div>
+    <button class="btn" (click)="formAbierto.set(!formAbierto())">
+      {{ formAbierto() ? 'Cancelar' : 'Nueva factura' }}
+    </button>
+  </div>
+
+  @if (aviso()) { <div class="msg-ok">{{ aviso() }}</div> }
+
+  @if (formAbierto()) {
+    <form class="panel form-grid" (submit)="guardar($event)">
+      <label>Cliente
+        <select [value]="nCliente()" (change)="campo('nCliente', $event)">
+          <option value="">Elegir…</option>
+          @for (c of clientes(); track c.idCliente) { <option [value]="c.idCliente">{{ c.apellido }}, {{ c.nombre }}</option> }
+        </select>
+      </label>
+      <label>Sucursal
+        <select [value]="nSucursal()" (change)="campo('nSucursal', $event)">
+          <option value="">Elegir…</option>
+          @for (s of sucursalesActivas(); track s.idSucursal) { <option [value]="s.idSucursal">{{ s.nombre }}</option> }
+        </select>
+      </label>
+      <label>Importe (sin IVA)
+        <input type="number" min="0" step="0.01" [value]="nImporte()" (input)="campo('nImporte', $event)">
+      </label>
+      <label>Fecha
+        <input type="date" [value]="nFecha()" (input)="campo('nFecha', $event)">
+      </label>
+      <div class="form-pie">
+        <span class="nota">IVA 21 %: $ {{ fmt(ivaPrevio()) }}</span>
+        <button class="btn" type="submit" [disabled]="guardando()">{{ guardando() ? 'Guardando…' : 'Guardar factura' }}</button>
+      </div>
+      @if (errorForm()) { <div class="msg-error full">{{ errorForm() }}</div> }
+    </form>
+  }
+
+  <div class="panel toolbar">
+    <input type="search" placeholder="Buscar por cliente o N.º de factura" (input)="buscar($event)">
+    <select (change)="filtrar('fEstado', $event)">
+      <option value="">Todos los estados</option>
+      @for (e of estados; track e) { <option [value]="e">{{ e }}</option> }
+    </select>
+    <select (change)="filtrar('fSucursal', $event)">
+      <option value="">Todas las sucursales</option>
+      @for (s of sucursales(); track s.idSucursal) { <option [value]="s.idSucursal">{{ s.nombre }}</option> }
+    </select>
+  </div>
+
+  @if (error()) { <div class="msg-error">{{ error() }}</div> }
+
+  <div class="resumen">
+    <span><strong>{{ total() }}</strong> facturas</span>
+    <span>Total con IVA: <strong>$ {{ fmt(suma()) }}</strong></span>
+  </div>
+
+  <div class="tabla-wrap">
+    <table class="tabla">
+      <thead>
+        <tr>
+          <th>N.º</th><th>Fecha</th><th>Cliente</th><th>Sucursal</th>
+          <th class="der">Importe</th><th class="der">IVA</th><th class="der">Total</th><th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (f of filas(); track f.NroFactura) {
+          <tr>
+            <td>{{ f.NroFactura }}</td>
+            <td>{{ f.FechaFactura }}</td>
+            <td>{{ f.cliente }}</td>
+            <td>{{ f.sucursal }}</td>
+            <td class="der">{{ fmt(f.Importe) }}</td>
+            <td class="der">{{ fmt(f.IVA) }}</td>
+            <td class="der"><strong>{{ fmt(f.total) }}</strong></td>
+            <td>
+              <select class="estado" [class]="'estado est-' + f.Estado" (change)="cambiarEstado(f, $event)">
+                @for (e of estados; track e) { <option [value]="e" [selected]="e === f.Estado">{{ e }}</option> }
+              </select>
+            </td>
+          </tr>
+        } @empty {
+          <tr><td colspan="8" class="centro">{{ cargando() ? 'Cargando…' : 'No hay facturas para ese filtro' }}</td></tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <div class="paginador">
+    <button class="btn btn-sec" (click)="irA(pagina() - 1)" [disabled]="pagina() <= 1">Anterior</button>
+    <span>Página {{ pagina() }} de {{ paginas() }}</span>
+    <button class="btn btn-sec" (click)="irA(pagina() + 1)" [disabled]="pagina() >= paginas()">Siguiente</button>
+  </div>
+</section>

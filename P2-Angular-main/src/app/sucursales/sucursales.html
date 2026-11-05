@@ -1,0 +1,74 @@
+<section class="branches-container">
+  <div class="branches-header cabecera">
+    <div>
+      <h2>Nuestras Sucursales</h2>
+      <p>Sedes operativas de la empresa con su dotación de personal.</p>
+    </div>
+    @if (esAdmin()) {
+      <button class="btn" (click)="formAbierto.set(!formAbierto())">
+        {{ formAbierto() ? 'Cancelar' : 'Nueva sucursal' }}
+      </button>
+    }
+  </div>
+
+  @if (aviso()) { <div class="msg-ok">{{ aviso() }}</div> }
+  @if (error()) { <div class="msg-error">{{ error() }}</div> }
+
+  @if (esAdmin() && formAbierto()) {
+    <form class="panel form-grid" (submit)="crear($event)">
+      <label>Nombre
+        <input type="text" [value]="nNombre()" (input)="campo('nNombre', $event)">
+      </label>
+      <label>Ciudad
+        <input type="text" [value]="nCiudad()" (input)="campo('nCiudad', $event)">
+      </label>
+      <label>Dirección
+        <input type="text" [value]="nDireccion()" (input)="campo('nDireccion', $event)">
+      </label>
+      <label>Cantidad de empleados
+        <input type="number" min="0" [value]="nEmpleados()" (input)="campo('nEmpleados', $event)">
+      </label>
+      <div class="form-pie">
+        <span></span>
+        <button class="btn" type="submit" [disabled]="guardando()">{{ guardando() ? 'Guardando…' : 'Crear sucursal' }}</button>
+      </div>
+      @if (errorForm()) { <div class="msg-error full">{{ errorForm() }}</div> }
+    </form>
+  }
+
+  @if (cargando()) {
+    <p>Cargando sucursales…</p>
+  } @else {
+    <div class="branches-grid">
+      @for (s of suc(); track s.idSucursal) {
+        <div class="branch-card" [class.baja]="!s.activo">
+          <div class="branch-info">
+            <div class="info-text">
+              <h3>Sucursal {{ s.nombre }}
+                @if (!s.activo) { <span class="badge badge-baja">De baja</span> }
+              </h3>
+              <p class="address">{{ s.direccion }}, {{ s.ciudad }}</p>
+            </div>
+          </div>
+          <div class="branch-meta">
+            <div class="meta-item">
+              <span class="meta-label">Personal:</span>
+              <span class="meta-value">{{ s.cantempleado }} Empleados</span>
+            </div>
+          </div>
+          @if (esAdmin()) {
+            <div class="acciones">
+              @if (s.activo) {
+                <button class="btn btn-peligro" (click)="cambiarEstado(s, false)">Dar de baja</button>
+              } @else {
+                <button class="btn btn-sec" (click)="cambiarEstado(s, true)">Reactivar</button>
+              }
+            </div>
+          }
+        </div>
+      } @empty {
+        <p>No hay sucursales para mostrar.</p>
+      }
+    </div>
+  }
+</section>

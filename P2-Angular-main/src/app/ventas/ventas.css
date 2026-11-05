@@ -1,0 +1,127 @@
+/* Contenedor Principal */
+.sales-dashboard {
+  padding: 2.5rem 1.5rem;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #1e293b;
+}
+
+/* Encabezado */
+.dashboard-header {
+  margin-bottom: 2rem;
+}
+
+.dashboard-header h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.025em;
+}
+
+.dashboard-header p {
+  color: #64748b;
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Estilo Base de las Tarjetas (Cards) */
+.card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Contenedor Grid para Gráficos */
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 1.5rem;
+}
+
+.chart-card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #334155;
+  margin: 0 0 1rem 0;
+}
+
+/* Contenedores para que el SVG sea responsivo */
+.svg-container {
+  width: 100%;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  border: 1px dashed #cbd5e1;
+  padding: 0.5rem;
+}
+
+svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible; /* Permite ver textos que sobresalen */
+}
+
+/* === ESTILOS PARA LA TABLA INYECTADA DINÁMICAMENTE === */
+.table-responsive table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.table-responsive caption {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f172a;
+  text-align: left;
+  padding-bottom: 1rem;
+}
+
+.table-responsive th {
+  background-color: #f1f5f9;
+  color: #475569;
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid #e2e8f0;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+.table-responsive td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #f1f5f9;
+  color: #334155;
+}
+
+.table-responsive tr:hover {
+  background-color: #f8fafc;
+}
+
+/* Estilo para las celdas de números de sucursales */
+.num {
+  font-family: monospace;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* Adaptación para pantallas móviles pequeñas */
+@media (max-width: 600px) {
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+  .table-card {
+    overflow-x: auto;
+  }
+}
+
+.num { text-align: right; }
+.error { color: #b91c1c; }
+.table-responsive tfoot th { background-color: #f0fdfa; color: #0f766e; font-size: 0.85rem; }
+
+.leyenda { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
+.leyenda-item { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.9rem; color: #334155; }
+.leyenda-item i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }

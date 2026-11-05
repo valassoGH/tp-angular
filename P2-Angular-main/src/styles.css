@@ -1,0 +1,45 @@
+/* Estilos compartidos por las pantallas de gestión (facturas, usuarios, sucursales) */
+.pagina { padding: 2.5rem 1.5rem; font-family: system-ui, -apple-system, sans-serif; color: #1e293b; }
+.pagina-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.pagina-header h2 { font-size: 2rem; font-weight: 800; color: #0f172a; margin: 0 0 0.5rem; letter-spacing: -0.025em; }
+.pagina-header p { color: #64748b; margin: 0; }
+
+.panel { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; margin-bottom: 1.25rem; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); }
+.form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; align-items: end; }
+.form-grid label { display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.85rem; font-weight: 600; color: #475569; }
+.form-pie { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; }
+.full { grid-column: 1 / -1; }
+.toolbar { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.toolbar input { flex: 1 1 260px; }
+
+.pagina input, .pagina select, .panel input, .panel select, .toolbar input, .toolbar select {
+  padding: 0.55rem 0.75rem; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem; background: #fff; font-family: inherit;
+}
+.pagina input:focus, .panel input:focus, .panel select:focus { outline: 2px solid #99f6e4; border-color: #0f766e; }
+
+.btn { padding: 0.55rem 1.1rem; border: 1px solid #0f766e; border-radius: 8px; background: #0f766e; color: #fff; font-size: 0.9rem; font-weight: 600; cursor: pointer; }
+.btn:hover:not(:disabled) { background: #0d5f59; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-sec { background: #fff; color: #0f766e; }
+.btn-sec:hover:not(:disabled) { background: #f0fdfa; }
+.btn-peligro { background: #fff; color: #b91c1c; border-color: #fca5a5; }
+.btn-peligro:hover:not(:disabled) { background: #fef2f2; }
+
+.msg-ok { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; border-radius: 8px; padding: 0.65rem 0.9rem; margin-bottom: 1rem; font-size: 0.9rem; }
+.msg-error { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; border-radius: 8px; padding: 0.65rem 0.9rem; margin-bottom: 1rem; font-size: 0.9rem; }
+.nota { color: #64748b; font-size: 0.85rem; }
+
+.resumen { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 0.75rem; color: #475569; font-size: 0.95rem; }
+.tabla-wrap { overflow-x: auto; background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); }
+.tabla { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.tabla th { background: #f1f5f9; color: #475569; font-size: 0.75rem; text-transform: uppercase; text-align: left; padding: 0.75rem 1rem; border-bottom: 2px solid #e2e8f0; white-space: nowrap; }
+.tabla td { padding: 0.65rem 1rem; border-bottom: 1px solid #f1f5f9; white-space: nowrap; }
+.tabla tr:hover td { background: #f8fafc; }
+.tabla .der { text-align: right; }
+.tabla .centro { text-align: center; color: #64748b; padding: 1.5rem; }
+.tabla tr.inactivo td { color: #94a3b8; }
+
+.badge { display: inline-block; padding: 0.15rem 0.6rem; border-radius: 999px; background: #dcfce7; color: #166534; font-size: 0.78rem; font-weight: 600; }
+.badge-baja { background: #fee2e2; color: #991b1b; }
+
+.paginador { display: flex; justify-content: center; align-items: center; gap: 1rem; margin-top: 1.25rem; color: #475569; font-size: 0.9rem; }

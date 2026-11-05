@@ -1,0 +1,28 @@
+<header class="main-header">
+  <div class="header-container">
+    <div class="brand">
+      <h1>{{ title() }}</h1>
+    </div>
+    <nav class="nav-menu">
+      @for (o of menu(); track o.ruta) {
+        <button [routerLink]="o.ruta" class="nav-btn" routerLinkActive="active-link">{{ o.etiqueta }}</button>
+      }
+      @if (!auth.logueado()) {
+        <button routerLink="/login" class="nav-btn" routerLinkActive="active-link">Ingresar</button>
+      }
+    </nav>
+    <div class="header-right">
+      @if (auth.usuario(); as u) {
+        <span class="user-chip">{{ u.usuario }} · {{ u.categoria }}</span>
+        <button class="nav-btn" (click)="auth.logout()">Salir</button>
+      }
+      <app-reloj></app-reloj>
+    </div>
+  </div>
+</header>
+
+<main class="content-wrapper">
+  <router-outlet></router-outlet>
+</main>
+
+<app-footer></app-footer>

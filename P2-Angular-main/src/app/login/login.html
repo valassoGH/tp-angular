@@ -1,0 +1,16 @@
+<section class="login-wrap">
+  <form class="login-card" (submit)="ingresar($event)">
+    <h2>Iniciar sesión</h2>
+    <p>Ingresá con tu usuario para acceder al sistema.</p>
+
+    <label for="usuario">Usuario</label>
+    <input id="usuario" type="text" autocomplete="username" [value]="usuario()" (input)="escribir('usuario', $event)">
+
+    <label for="clave">Contraseña</label>
+    <input id="clave" type="password" autocomplete="current-password" [value]="clave()" (input)="escribir('clave', $event)">
+
+    @if (error()) { <div class="login-error">{{ error() }}</div> }
+
+    <button type="submit" [disabled]="enviando()">{{ enviando() ? 'Verificando…' : 'Ingresar' }}</button>
+  </form>
+</section>

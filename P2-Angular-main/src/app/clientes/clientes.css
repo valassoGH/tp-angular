@@ -1,0 +1,156 @@
+/* Contenedor Principal */
+.customers-container {
+    padding: 2.5rem 1.5rem;
+    font-family: system-ui, -apple-system, sans-serif;
+    color: #1e293b;
+  }
+  
+  /* Encabezado */
+  .customers-header {
+    margin-bottom: 2.5rem;
+  }
+  
+  .customers-header h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -0.025em;
+  }
+  
+  .customers-header p {
+    color: #64748b;
+    font-size: 1rem;
+    margin: 0;
+  }
+  
+  /* Contenedor Responsivo para Scroll Horizontal en Móviles */
+  .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Estilos de la Tabla */
+  .customers-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.95rem;
+  }
+  
+  .customers-table th {
+    background-color: #f8fafc;
+    color: #475569;
+    font-weight: 600;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+  
+  .customers-table td {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+  }
+  
+  /* Animación Hover en las Filas */
+  .customers-table tbody tr:hover {
+    background-color: #f8fafc;
+  }
+  
+  /* Alineaciones Utilitarias */
+  .text-center { text-align: center !important; }
+  .text-right { text-align: right !important; }
+  
+  /* Identidad del Cliente (Avatar + Texto) */
+  .customer-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .avatar-fallback {
+    width: 40px;
+    height: 40px;
+    background-color: #e2e8f0;
+    color: #475569;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    border: 1px solid #cbd5e1;
+  }
+  
+  .customer-name {
+    color: #334155;
+  }
+  
+  .customer-name .lastname {
+    font-weight: 700;
+    color: #0f172a;
+  }
+  
+  /* Diseño de los Badges de Estado (Reemplazo de los estilos en línea) */
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  
+  .status-badge.active {
+    background-color: #dcfce7; /* Verde suave */
+    color: #166534;
+  }
+  
+  .status-badge.inactive {
+    background-color: #fee2e2; /* Rojo suave */
+    color: #991b1b;
+  }
+  
+  .status-icon {
+    font-size: 0.75rem;
+  }
+  
+  /* Botón de Acción */
+  .btn-edit {
+    background-color: #ffffff;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .btn-edit:hover {
+    background-color: #f1f5f9;
+    color: #0f172a;
+    border-color: #cbd5e1;
+  }
+  
+.buscador {
+  margin-top: 1rem;
+  width: 100%;
+  max-width: 380px;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+.aviso { padding: 1rem 0; color: #64748b; }
+.aviso.error { color: #b91c1c; }

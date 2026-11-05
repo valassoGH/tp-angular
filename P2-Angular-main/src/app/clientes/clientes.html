@@ -1,0 +1,46 @@
+<section class="customers-container">
+  <div class="customers-header">
+    <h2>Listado de Clientes</h2>
+    <p>Clientes registrados con su situación fiscal y DNI.</p>
+    <input class="buscador" type="search" placeholder="Buscar por apellido, nombre o DNI…"
+           (input)="buscar($event)">
+  </div>
+
+  @if (cargando()) {
+    <p class="aviso">Cargando clientes…</p>
+  } @else if (error()) {
+    <p class="aviso error">{{ error() }}</p>
+  } @else {
+    <div class="table-responsive">
+      <table class="customers-table">
+        <thead>
+          <tr>
+            <th>Cliente (Apellido y Nombre)</th>
+            <th>DNI</th>
+            <th class="text-center">Situación fiscal</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (c of visibles(); track c.idCliente) {
+            <tr>
+              <td>
+                <div class="customer-info">
+                  <div class="avatar-fallback">{{ c.apellido.charAt(0) }}{{ c.nombre.charAt(0) }}</div>
+                  <div class="customer-name">
+                    <span class="lastname">{{ c.apellido }}</span>, {{ c.nombre }}
+                  </div>
+                </div>
+              </td>
+              <td>{{ c.dni }}</td>
+              <td class="text-center">
+                <span class="status-badge active">{{ c.situacionFiscal }}</span>
+              </td>
+            </tr>
+          } @empty {
+            <tr><td colspan="3" class="text-center">Sin resultados</td></tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</section>

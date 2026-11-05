@@ -1,0 +1,62 @@
+<section class="pagina">
+  <div class="pagina-header">
+    <div>
+      <h2>Usuarios</h2>
+      <p>Alta y baja de usuarios del sistema. Solo disponible para administradores.</p>
+    </div>
+    <button class="btn" (click)="formAbierto.set(!formAbierto())">
+      {{ formAbierto() ? 'Cancelar' : 'Nuevo usuario' }}
+    </button>
+  </div>
+
+  @if (aviso()) { <div class="msg-ok">{{ aviso() }}</div> }
+  @if (error()) { <div class="msg-error">{{ error() }}</div> }
+
+  @if (formAbierto()) {
+    <form class="panel form-grid" (submit)="crear($event)">
+      <label>Usuario
+        <input type="text" autocomplete="off" [value]="nUsuario()" (input)="campo('nUsuario', $event)">
+      </label>
+      <label>Contraseña (mínimo 6 caracteres)
+        <input type="password" autocomplete="new-password" [value]="nClave()" (input)="campo('nClave', $event)">
+      </label>
+      <label>Categoría
+        <select [value]="nNivel()" (change)="campo('nNivel', $event)">
+          <option value="1">Empleado</option>
+          <option value="2">Administrador</option>
+        </select>
+      </label>
+      <div class="form-pie">
+        <span></span>
+        <button class="btn" type="submit" [disabled]="guardando()">{{ guardando() ? 'Guardando…' : 'Crear usuario' }}</button>
+      </div>
+      @if (errorForm()) { <div class="msg-error full">{{ errorForm() }}</div> }
+    </form>
+  }
+
+  <div class="tabla-wrap">
+    <table class="tabla">
+      <thead>
+        <tr><th>Usuario</th><th>Categoría</th><th>Estado</th><th class="der">Acción</th></tr>
+      </thead>
+      <tbody>
+        @for (u of lista(); track u.idUsuario) {
+          <tr [class.inactivo]="!u.activo">
+            <td>{{ u.usuario }}@if (esYo(u)) { <span class="nota"> (vos)</span> }</td>
+            <td>{{ u.categoria }}</td>
+            <td><span class="badge" [class.badge-baja]="!u.activo">{{ u.activo ? 'Activo' : 'De baja' }}</span></td>
+            <td class="der">
+              @if (u.activo && !esYo(u)) {
+                <button class="btn btn-peligro" (click)="cambiarEstado(u, false)">Dar de baja</button>
+              } @else if (!u.activo) {
+                <button class="btn btn-sec" (click)="cambiarEstado(u, true)">Dar de alta</button>
+              }
+            </td>
+          </tr>
+        } @empty {
+          <tr><td colspan="4" class="centro">{{ cargando() ? 'Cargando…' : 'Sin usuarios' }}</td></tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>
