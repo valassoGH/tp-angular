@@ -1,2 +1,11 @@
 # tp-angular
 Sistema Angular.
+1) Copiar la carpeta  api  a  C:\xampp\htdocs\api   (reemplazar los archivos anteriores)
+2) En phpMyAdmin: seleccionar la base bdfacturas -> Importar -> sql\actualizacion.sql
+   (se ejecuta una sola vez; corrige el IVA de las facturas y agrega baja de sucursales/usuarios)
+3) En la carpeta P2-Angular-main:  npm install  y despues  npx ng serve
+4) Abrir http://localhost:4200  (cerrar sesion y volver a ingresar)
+
+Usuarios de prueba:
+  empleado / empleado123   Home, Clientes, Sucursales, Ventas y Facturas
+  admin    / admin123      Todo lo anterior + alta/baja de sucursales y usuarios
